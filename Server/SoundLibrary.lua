@@ -264,13 +264,14 @@ function sound:AttachTo(other, attachment_rule, bone_name, lifespan_when_detache
   end
   self.Shared["attachment"] = inTable
   Events.BroadcastRemote("C_AttachTo", self.index, inTable)
+
+
   self.attachSubscribe = other:Subscribe("Destroy", function(actor)
     if(self) then
       self.Shared["attachment"] = nil
     end
   end)
 end
-
 
 --Detaches this Sound from AttachedTo Actor
 function sound:Detach()

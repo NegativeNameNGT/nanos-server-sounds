@@ -8,7 +8,7 @@ function GetSoundByIndex(iindex)
   return all_sounds[iindex]
 end
 
-function SpawnSound(tSound, tShared, iIndex, bSend)
+function SpawnSound(tSound, tShared, iIndex, bSend, bUpdateElapsedTime, fElapsedTime, fDiff)
   local serverSound = Sound(
     tSound["location"], -- Location (if a 3D sound)
     tSound["asset"], -- Asset Path
@@ -23,6 +23,11 @@ function SpawnSound(tSound, tShared, iIndex, bSend)
     tSound["keep_playing_when_silent"],
     tSound["loop_mode"]
   )
+  if(bUpdateElapsedTime) then
+    if(fElapsedTime ~= nil) then
+      serverSound:Play((fElapsedTime / 1000) + fDiff)
+    end
+  end
   UpdateShared(serverSound, tShared)
 
   if(bSend == true) then
@@ -68,7 +73,11 @@ end
 Events.Subscribe("UpdateSounds", function(all_sounds)
   Timer.SetTimeout(function()
     for k,v in pairs(all_sounds) do
-      SpawnSound(v.Values, v.Shared, v.index, not v.hasDuration)
+      local UpdateElapsedTime = false
+      if(v.updateElapsedTime == true) then
+        UpdateElapsedTime = true
+      end
+      SpawnSound(v.Values, v.Shared, v.index, not v.hasDuration, UpdateElapsedTime, v.elapsedTime, v.nDur)
     end
   end, 1000)
 end)

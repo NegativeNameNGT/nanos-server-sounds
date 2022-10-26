@@ -7,6 +7,7 @@ sound.__index = sound
 ---@param location Vector
 ---@param asset string
 ---@param duration number | nil
+---@param UpdateElapsedTime boolean
 ---@param is_2D_sound? boolean
 ---@param auto_destroy? boolean
 ---@param sound_type? SoundType
@@ -18,7 +19,7 @@ sound.__index = sound
 ---@param keep_playing_when_silent? boolean
 ---@param loop_mode? SoundLoopMode
 ---@return Sound
-function CreateSound(location, asset, duration, is_2D_sound, auto_destroy, sound_type, volume, pitch, inner_radius, falloff_distance, attenuation_function, keep_playing_when_silent, loop_mode)
+function CreateSound(location, asset, duration, UpdateElapsedTime, is_2D_sound, auto_destroy, sound_type, volume, pitch, inner_radius, falloff_distance, attenuation_function, keep_playing_when_silent, loop_mode)
   local newSound = {}
 
   newSound.Values = {
@@ -36,10 +37,14 @@ function CreateSound(location, asset, duration, is_2D_sound, auto_destroy, sound
     ["loop_mode"] = loop_mode or SoundLoopMode.Default
     }
     newSound.duration = duration
+    newSound.updateElapsedTime = UpdateElapsedTime
+
     if duration ~= nil then
       newSound.hasDuration = true
+      newSound.nDur = 0
       SetupTimer(newSound, duration)
     else
+      newSound.nDur = os.time(os.date("*t"))
       newSound.hasDuration = false
     end
 
@@ -62,6 +67,13 @@ end
 
 Player.Subscribe("Ready", function(pPlayer)
   if #Sounds == 0 then return end
+  for k,v in pairs(Sounds) do
+    if(v.updateElapsedTime == true) then
+      if(v.timer ~= nil) then
+        v.elapsedTime = Timer.GetElapsedTime(v.timer)
+      end
+    end
+  end
   Events.CallRemote("UpdateSounds", pPlayer, Sounds)
 end)
 
@@ -96,6 +108,9 @@ Events.Subscribe("SetSoundDuration", function(pPlayer, iSoundIndex, fDuration)
       SetupTimer(sound, (fDuration * 1000) - (sound.fadeInDuration or 0))
       sound.duration = fDuration
       sound.hasDuration = true
+
+      local now = os.time(os.date("*t"))
+      sound.nDur = os.difftime(now, sound.nDur)
     end
   end
 end)
