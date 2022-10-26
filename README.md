@@ -142,6 +142,118 @@ sound:SetVolume(new_volume)
 | --------------------  |:------------- 
 | number             | 0-1
 
+### `sound:SetValue`
+#### Sets a value in this sound
+```lua
+sound:SetValue(key, value)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| string             | 
+| any             | 
+
+### `sound:GetValue`
+#### Gets a value in this sound
+```lua
+local value = sound:GetValue(key)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| any             |
+
+### `sound:GetAllValuesKeys`
+#### Gets all values keys of this sound
+```lua
+local value = sound:GetAllValuesKeys()
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| table of strings             |
+
+
+### `sound:GetPitch`
+#### Gets the pitch of the sound
+```lua
+local pitch = sound:GetPitch()
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number             |
+
+### `sound:GetVolume`
+#### Gets the volume of the sound
+```lua
+local volume = sound:GetVolume()
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number             |
+
+### `sound:Is2D`
+#### Gets if the sound is 2D
+```lua
+local ret = sound:Is2D()
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| boolean             |
+
+### `sound:IsPlaying`
+#### Gets if the sound is playing
+```lua
+local ret = sound:IsPlaying()
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| boolean             |
+
+### `sound:GetDuration`
+#### Gets the duration of the sound
+```lua
+local duration = sound:GetDuration()
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number             |
+
+### `sound:GetLowPassFilter`
+#### Gets the low pass filter of the sound
+```lua
+local filter = sound:GetLowPassFilter()
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number             |
+
+### `sound:GetInnerRadius`
+#### Gets the inner radius of the sound
+```lua
+local inner_radius = sound:GetInnerRadius()
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number             |
+
+### `sound:GetFalloffDistance`
+#### Gets the falloff distance of the sound
+```lua
+local falloff_distance = sound:GetFalloffDistance()
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number             |
+
+### `sound:GetSoundType`
+#### Gets the type of the sound
+```lua
+local sound_type = sound:GetSoundType()
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number             |
+
+
+
 # 📢 Scripting events
 
 ### `sound:Spawn`
