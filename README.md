@@ -34,9 +34,115 @@ local mySound = CreateSound(location, asset, duration, is_2D_sound?, auto_destro
 | keep_playing_when_silent?  | boolean  |
 | loop_mode?  | SoundLoopMode  |
 
-## 🔧 Scripting functions
+# 🔧 Scripting functions
 
-## 📢 Scripting events
+### `sound:Play`
+#### Starts the sound (the sound automatically plays when constructed)
+```lua
+sound:Play(start_time?)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number              | 
+
+### `sound:Stop`
+#### Stops the sound
+```lua
+sound:Stop()
+```
+
+### `sound:StopDelayed`
+#### Stops the sound after the provided delay
+```lua
+sound:StopDelayed(delay)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number              | 
+
+### `sound:Destroy`
+#### Destroys this sound
+```lua
+sound:Destroy()
+```
+
+### `sound:FadeIn`
+#### Plays the sound with a fade effect
+```lua
+sound:FadeIn(FadeInDuration, FadeVolumeLevel?, Start_Time?)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number              | 
+| number              | 
+| number              | 
+
+### `sound:FadeOut`
+#### Stops the sound with a fade effect
+```lua
+sound:FadeOut(FadeOutDuration, FadeVolumeLevel?, DestroyAfterFadeout?)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number              | 
+| number              | 
+| boolean              | 
+
+### `sound:SetFalloffDistance`
+#### If a 3D Sound, sets the distance which the sound is inaudible
+```lua
+sound:SetFalloffDistance(FalloffDistance)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number              | 
+
+### `sound:SetInnerRadius`
+#### If a 3D Sound, sets the distance within the volume is 100%
+```lua
+sound:SetInnerRadius(InnerRadius)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number              | 
+
+### `sound:SetLowPassFilter`
+#### Sets lowpass filter frequency. Sets 0 to disable it.
+```lua
+sound:SetLowPassFilter(frequency)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number              | 
+
+### `sound:SetPaused`
+#### Pauses or resumes the sound
+```lua
+sound:SetPaused(pause)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| boolean              | 
+
+### `sound:SetPitch`
+#### Sets the Sound's pitch
+```lua
+sound:SetPitch(new_pitch)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number             | 
+
+### `sound:SetVolume`
+#### Sets the Sound's volume
+```lua
+sound:SetVolume(new_volume)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number             | 0-1
+
+# 📢 Scripting events
 
 ### `sound:Spawn`
 #### Triggered when a Sound is spawned/created
