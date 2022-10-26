@@ -142,6 +142,97 @@ sound:SetVolume(new_volume)
 | --------------------  |:------------- 
 | number             | 0-1
 
+### `sound:SetLocation`
+#### Sets this Sound's location in the game world
+```lua
+sound:SetLocation(new_location)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| Vector             | the new location
+
+### `sound:GetLocation`
+#### Gets this Sound's location in the game world
+```lua
+local location = sound:GetLocation()
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| Vector             | the location of the sound
+
+### `sound:SetRotation`
+#### Sets this Sound's rotation in the game world
+```lua
+sound:SetRotation(new_rotation)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| Rotator             | the new rotation
+
+### `sound:GetRotation`
+#### Gets this Sound's rotation in the game world
+```lua
+local rotation = sound:GetRotation()
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| Rotator             | the rotation of the sound
+
+### `sound:SetRelativeLocation`
+#### Sets this Sound's relative location (only if this sound is attached)
+```lua
+sound:SetRelativeLocation(new_relative_location)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| Vector             | the new relative location
+
+### `sound:GetRelativeLocation`
+#### Gets this Sound's relative location (only if this sound is attached)
+```lua
+local relative_location = sound:GetRelativeLocation()
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| Vector             | the relative location of the sound
+
+### `sound:AttachTo`
+#### Attaches this Sound to any other Actor, optionally at a specific bone
+```lua
+sound:AttachTo(other, attachment_rule, bone_name, lifespan_when_detached, use_absolute_rotation)
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| Actor             | 
+| AttachmentRule             | 
+| string             | 
+| number             | 
+| boolean             | 
+
+### `sound:Detach`
+#### Detaches this Sound from AttachedTo Actor
+```lua
+sound:Detach()
+```
+
+### `sound:GetAttachedTo`
+#### Gets the Actor this Sound is attached to
+```lua
+local ret = sound:GetAttachedTo()
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| Actor / nil             | 
+
+### `sound:GetID`
+#### Gets the universal network ID of this Sound (same on both client and server)
+```lua
+local id = sound:GetID()
+```
+| Type                  | Description  |
+| --------------------  |:------------- 
+| number             | 
+
 ### `sound:SetValue`
 #### Sets a value in this sound
 ```lua
