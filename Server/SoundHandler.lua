@@ -41,10 +41,8 @@ function CreateSound(location, asset, duration, UpdateElapsedTime, is_2D_sound, 
 
     if duration ~= nil then
       newSound.hasDuration = true
-      newSound.nDur = 0
       SetupTimer(newSound, duration)
     else
-      newSound.nDur = os.time(os.date("*t"))
       newSound.hasDuration = false
     end
 
@@ -108,9 +106,6 @@ Events.Subscribe("SetSoundDuration", function(pPlayer, iSoundIndex, fDuration)
       SetupTimer(sound, (fDuration * 1000) - (sound.fadeInDuration or 0))
       sound.duration = fDuration
       sound.hasDuration = true
-
-      local now = os.time(os.date("*t"))
-      sound.nDur = os.difftime(now, sound.nDur)
     end
   end
 end)
