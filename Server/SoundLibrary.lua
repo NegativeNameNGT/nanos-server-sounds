@@ -256,12 +256,25 @@ end
 ---@param use_absolute_rotation? boolean
 function sound:AttachTo(other, attachment_rule, bone_name, lifespan_when_detached, use_absolute_rotation)
   local inTable = {other, attachment_rule, bone_name, lifespan_when_detached, use_absolute_rotation}
+
+  if(self.Shared["attachment"]) then
+    if(self.attachSubscribe) then
+      self.Shared["attachment"][1]:Unsubscribe("Destroy", self.attachSubscribe)
+    end
+  end
   self.Shared["attachment"] = inTable
   Events.BroadcastRemote("C_AttachTo", self.index, inTable)
+  self.attachSubscribe = other:Subscribe("Destroy", function(actor)
+    if(self) then
+      self.Shared["attachment"] = nil
+    end
+  end)
 end
+
 
 --Detaches this Sound from AttachedTo Actor
 function sound:Detach()
+  self.Shared["attachment"][1]:Unsubscribe("Destroy", self.attachSubscribe)
   self.Shared["attachment"] = nil
   Events.BroadcastRemote("C_Detach", self.index)
 end
