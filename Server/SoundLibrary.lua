@@ -6,6 +6,8 @@ function sound:Play(start_time)
 
   InternalEventCall("Play", "Global", {self})
   InternalEventCall("Play", self.index, {self})
+
+  return self
 end
 
 --Plays the sound with a fade effect
@@ -26,6 +28,8 @@ function sound:FadeIn(FadeInDuration, FadeVolumeLevel, Start_Time)
       self.fadeInDuration = Start_Time
     end
   end
+
+  return self
 end
 
 --Stops the sound with a fade effect
@@ -40,6 +44,7 @@ function sound:FadeOut( FadeOutDuration, FadeVolumeLevel, DestroyAfterFadeout)
       self:Remove()
     end, FadeOutDuration)
   end
+  return self
 end
 
 --If a 3D Sound, sets the distance which the sound is inaudible
@@ -49,6 +54,8 @@ function sound:SetFalloffDistance(FalloffDistance)
     self.Values["falloff_distance"] = FalloffDistance
     Events.BroadcastRemote("C_SetFalloffDistance", self.index, FalloffDistance)
   end
+
+  return self
 end
 
 --If a 3D Sound, sets the distance within the volume is 100%
@@ -58,6 +65,8 @@ function sound:SetInnerRadius(InnerRadius)
     self.Values["inner_radius"] = InnerRadius
     Events.BroadcastRemote("C_SetInnerRadius", self.index, InnerRadius)
   end
+
+  return self
 end
 
 -- Sets lowpass filter frequency. Sets 0 to disable it.
@@ -65,6 +74,8 @@ end
 function sound:SetLowPassFilter(frequency)
   self.Shared["lowpass_filter"] = frequency
   Events.BroadcastRemote("C_SetLowPassFilter", self.index, frequency)
+
+  return self
 end
 
 --Pauses the sound
@@ -79,6 +90,7 @@ function sound:SetPaused(pause)
   else
    Timer.Resume(self.timer)
   end
+  return self
 end
 
 --Sets the Sound's pitch
@@ -86,6 +98,7 @@ end
 function sound:SetPitch(new_pitch)
   self.Values["pitch"] = new_pitch
   Events.BroadcastRemote("C_SetPitch", self.index, new_pitch)
+  return self
 end
 
 
@@ -94,12 +107,14 @@ end
 function sound:SetVolume(new_volume)
   self.Values["volume"] = new_volume
   Events.BroadcastRemote("C_SetVolume", self.index, new_volume)
+  return self
 end
 
 --Stops the sound
 function sound:Stop()
   self.Shared["stopped"] = true
   Events.BroadcastRemote("C_StopSound", self.index)
+  return self
 end
 
 --Stops the sound after the provided delay
@@ -109,6 +124,7 @@ function sound:StopDelayed(delay)
     self.Shared["stopped"] = true
     Events.BroadcastRemote("C_StopSound", self.index)
   end, delay)
+  return self
 end
 
 --Destroys this sound
@@ -214,6 +230,8 @@ end
 function sound:SetLocation(new_location)
   self.Values["location"] = new_location
   Events.BroadcastRemote("C_SetLocation", self.index, new_location)
+
+  return self
 end
 
 --Gets this Sound's location in the game world
@@ -227,6 +245,8 @@ end
 function sound:SetRotation(new_location)
   self.Shared["rotation"] = new_location
   Events.BroadcastRemote("C_SetRotation", self.index, new_location)
+
+  return self
 end
 
 --Gets this Sound's rotation in the game world
@@ -240,6 +260,8 @@ end
 function sound:SetRelativeLocation(new_location)
   self.Shared["relative_location"] = new_location
   Events.BroadcastRemote("C_SetRelativeLocation", self.index, new_location)
+
+  return self
 end
 
 --Gets this Sound's relative location (only if this sound is attached)
@@ -271,6 +293,8 @@ function sound:AttachTo(other, attachment_rule, bone_name, lifespan_when_detache
       self.Shared["attachment"] = nil
     end
   end)
+  
+  return self
 end
 
 --Detaches this Sound from AttachedTo Actor
@@ -278,6 +302,8 @@ function sound:Detach()
   self.Shared["attachment"][1]:Unsubscribe("Destroy", self.attachSubscribe)
   self.Shared["attachment"] = nil
   Events.BroadcastRemote("C_Detach", self.index)
+
+  return self
 end
 
 --Gets the Actor this Sound is attached to
