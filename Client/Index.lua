@@ -70,7 +70,7 @@ function UpdateShared(Sound, tShared)
   end
 end
 
-Events.Subscribe("UpdateSounds", function(all_sounds)
+Events.SubscribeRemote("UpdateSounds", function(all_sounds)
   Timer.SetTimeout(function()
     for k,v in pairs(all_sounds) do
       local UpdateElapsedTime = false

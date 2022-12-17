@@ -99,7 +99,7 @@ function BroadcastSound(tSound)
 
 end
 
-Events.Subscribe("SetSoundDuration", function(pPlayer, iSoundIndex, fDuration)
+Events.SubscribeRemote("SetSoundDuration", function(pPlayer, iSoundIndex, fDuration)
   local sound = Sounds[iSoundIndex]
   if sound ~= nil then
     if sound.hasDuration == false then
