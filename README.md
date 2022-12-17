@@ -3,7 +3,7 @@ Spawn sounds server side to have them synchronized across all players!
 
 ## 📦 Installing the package
 - Download it, extract it and add it in your server Packages file : YourServer/Packages/
-- Require the package :
+- Require the package in a shared script (or add it to your Package.toml file):
 ```lua
 Package.RequirePackage("nanos-serversidesounds")
 ```
